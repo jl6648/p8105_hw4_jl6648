@@ -4,7 +4,12 @@ output: html_document
 date: "2023-10-26"
 ---
 
-```{r}
+# Welcome to my website 
 
-```
+This is the introduction:
 
+My name is Jixin Li, here is my website. The resume page include a resume with my academic and professional experience, please check it out. The upper right coner shows a link to my email and GitHub account, please feel free to reach out! 
+
+# Here is the next section 
+
+this is a [link](https://github.com/jl6648) to my GitHub account. 
