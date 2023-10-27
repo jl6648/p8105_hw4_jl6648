@@ -1,18 +1,12 @@
 ---
-title: "p8105_hw4_jl6648"
+title: "My awesome website"
 output: 
   html_document:
-        toc: true
-        toc_float: true
+    toc: true
+    toc_float: true
 ---
-
 # Welcome to my website 
 
 This is the introduction:
 
 My name is Jixin Li, here is my website. The resume page include a resume with my academic and professional experience, please check it out. The upper right coner shows a link to my email and GitHub account, please feel free to reach out! 
-
-
-
-
-
