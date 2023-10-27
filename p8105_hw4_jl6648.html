@@ -294,6 +294,50 @@ href="mailto:%3Cjl6648@cumc.columbia.edu%3E">link</a> to my email. this
 is a <a
 href="https://www.linkedin.com/feed/?trk=homepage-basic_sign-in-submit">link</a>
 to my linkin.</p>
+<div id="problem-2" class="section level2">
+<h2>problem 2</h2>
+</div>
+<div id="column" class="section level2" data-width="650">
+<h2>Column</h2>
+<div id="chart-a" class="section level3">
+<h3>Chart A</h3>
+<pre class="r"><code>data(&quot;rest_inspec&quot;)
+
+rest_inspec_df =
+  rest_inspec |&gt;
+  filter(grade %in% c(&quot;A&quot;, &quot;B&quot;, &quot;C&quot;), boro != &quot;Missing&quot;) |&gt; 
+  mutate(boro = str_to_title(boro))
+
+rest_inspec_df |&gt;
+  drop_na() |&gt;
+  ggplot(aes(x = boro, y = score, color = boro)) +
+  geom_boxplot(outlier.color = &quot;black&quot;)</code></pre>
+<p><img src="p8105_hw4_jl6648_files/figure-html/unnamed-chunk-1-1.png" width="672" /></p>
+</div>
+</div>
+<div id="column-1" class="section level2" data-width="350">
+<h2>Column</h2>
+<div id="chart-b" class="section level3">
+<h3>Chart B</h3>
+<pre class="r"><code>rest_inspec_df |&gt;
+  drop_na() |&gt;
+  ggplot(aes(x = inspection_date, y = score, color = boro)) +
+  facet_wrap(~boro) +
+  geom_line()</code></pre>
+<p><img src="p8105_hw4_jl6648_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>
+</div>
+<div id="chart-c" class="section level3">
+<h3>Chart C</h3>
+<pre class="r"><code>rest_inspec_df |&gt; 
+  filter(str_detect(dba, &quot;[Pp][Ii][Zz][Zz][Aa]&quot;)) |&gt;
+  mutate(
+    boro = fct_infreq(boro),
+    boro = fct_recode(boro, &quot;The City&quot; = &quot;Manhattan&quot;)) |&gt;
+  ggplot(aes(x = boro, fill = grade)) + 
+  geom_bar() </code></pre>
+<p><img src="p8105_hw4_jl6648_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
+</div>
+</div>
 </div>
 
 

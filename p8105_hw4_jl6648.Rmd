@@ -13,3 +13,63 @@ My name is Jixin Li, here is my website. The resume page include a resume with m
 # Here is the next section 
 
 this is a [link](https://github.com/jl6648) to my GitHub account. this is a [link](mailto:<jl6648@cumc.columbia.edu>) to my email. this is a [link](https://www.linkedin.com/feed/?trk=homepage-basic_sign-in-submit) to my linkin. 
+
+## problem 2
+
+
+```{r setup, include=FALSE}
+library(flexdashboard)
+
+library(tidyverse)
+library(plotly)
+library(p8105.datasets)
+```
+
+Column {data-width=650}
+-----------------------------------------------------------------------
+
+### Chart A
+
+```{r}
+data("rest_inspec")
+
+rest_inspec_df =
+  rest_inspec |>
+  filter(grade %in% c("A", "B", "C"), boro != "Missing") |> 
+  mutate(boro = str_to_title(boro))
+
+rest_inspec_df |>
+  drop_na() |>
+  ggplot(aes(x = boro, y = score, color = boro)) +
+  geom_boxplot(outlier.color = "black")
+```
+
+Column {data-width=350}
+-----------------------------------------------------------------------
+
+### Chart B
+
+```{r}
+
+rest_inspec_df |>
+  drop_na() |>
+  ggplot(aes(x = inspection_date, y = score, color = boro)) +
+  facet_wrap(~boro) +
+  geom_line()
+
+```
+
+### Chart C
+
+
+```{r}
+
+rest_inspec_df |> 
+  filter(str_detect(dba, "[Pp][Ii][Zz][Zz][Aa]")) |>
+  mutate(
+    boro = fct_infreq(boro),
+    boro = fct_recode(boro, "The City" = "Manhattan")) |>
+  ggplot(aes(x = boro, fill = grade)) + 
+  geom_bar() 
+```
+
