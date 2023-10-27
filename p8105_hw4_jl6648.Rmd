@@ -12,4 +12,4 @@ My name is Jixin Li, here is my website. The resume page include a resume with m
 
 # Here is the next section 
 
-this is a [link](https://github.com/jl6648) to my GitHub account. 
+this is a [link](https://github.com/jl6648) to my GitHub account. this is a [link](mailto:<jl6648@cumc.columbia.edu>) to my email. this is a [link](https://www.linkedin.com/feed/?trk=homepage-basic_sign-in-submit) to my linkin. 
