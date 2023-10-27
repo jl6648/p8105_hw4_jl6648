@@ -1,0 +1,66 @@
+---
+title: "Problem 2"
+output: 
+  flexdashboard::flex_dashboard:
+    orientation: columns
+    vertical_layout: fill
+---
+
+
+```{r setup, include=FALSE}
+library(flexdashboard)
+
+library(tidyverse)
+library(plotly)
+library(p8105.datasets)
+```
+
+Column {data-width=650}
+-----------------------------------------------------------------------
+
+### Chart A
+
+```{r}
+data("rest_inspec")
+
+rest_inspec_df =
+  rest_inspec |>
+  filter(grade %in% c("A", "B", "C"), boro != "Missing") |> 
+  mutate(boro = str_to_title(boro))
+
+rest_inspec_df |>
+  drop_na() |>
+  ggplot(aes(x = boro, y = score, color = boro)) +
+  geom_boxplot(outlier.color = "black")
+```
+
+Column {data-width=350}
+-----------------------------------------------------------------------
+
+### Chart B
+
+```{r}
+
+rest_inspec_df |>
+  drop_na() |>
+  ggplot(aes(x = inspection_date, y = score, color = boro)) +
+  facet_wrap(~boro) +
+  geom_line()
+
+```
+
+### Chart C
+
+
+```{r}
+
+rest_inspec_df |> 
+  filter(str_detect(dba, "[Pp][Ii][Zz][Zz][Aa]")) |>
+  mutate(
+    boro = fct_infreq(boro),
+    boro = fct_recode(boro, "The City" = "Manhattan")) |>
+  ggplot(aes(x = boro, fill = grade)) + 
+  geom_bar() 
+```
+
+

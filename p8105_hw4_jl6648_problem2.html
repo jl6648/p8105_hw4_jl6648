@@ -10,9 +10,8 @@
 
 
 
-<meta name="date" content="2023-10-26" />
 
-<title>p8105_hw4_jl6648</title>
+<title>Problem 2</title>
 
 <script src="site_libs/header-attrs-2.24/header-attrs.js"></script>
 <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
@@ -272,19 +271,51 @@ $(document).ready(function () {
 
 
 
-<h1 class="title toc-ignore">p8105_hw4_jl6648</h1>
-<h4 class="date">2023-10-26</h4>
+<h1 class="title toc-ignore">Problem 2</h1>
 
 </div>
 
 
-<div id="welcome-to-my-website" class="section level1">
-<h1>Welcome to my website</h1>
-<p>This is the introduction:</p>
-<p>My name is Jixin Li, here is my website. The resume page include a
-resume with my academic and professional experience, please check it
-out. The upper right coner shows a link to my email and GitHub account,
-please feel free to reach out!</p>
+<div id="column" class="section level2" data-width="650">
+<h2>Column</h2>
+<div id="chart-a" class="section level3">
+<h3>Chart A</h3>
+<pre class="r"><code>data(&quot;rest_inspec&quot;)
+
+rest_inspec_df =
+  rest_inspec |&gt;
+  filter(grade %in% c(&quot;A&quot;, &quot;B&quot;, &quot;C&quot;), boro != &quot;Missing&quot;) |&gt; 
+  mutate(boro = str_to_title(boro))
+
+rest_inspec_df |&gt;
+  drop_na() |&gt;
+  ggplot(aes(x = boro, y = score, color = boro)) +
+  geom_boxplot(outlier.color = &quot;black&quot;)</code></pre>
+<p><img src="p8105_hw4_jl6648_problem2_files/figure-html/unnamed-chunk-1-1.png" width="672" /></p>
+</div>
+</div>
+<div id="column-1" class="section level2" data-width="350">
+<h2>Column</h2>
+<div id="chart-b" class="section level3">
+<h3>Chart B</h3>
+<pre class="r"><code>rest_inspec_df |&gt;
+  drop_na() |&gt;
+  ggplot(aes(x = inspection_date, y = score, color = boro)) +
+  facet_wrap(~boro) +
+  geom_line()</code></pre>
+<p><img src="p8105_hw4_jl6648_problem2_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>
+</div>
+<div id="chart-c" class="section level3">
+<h3>Chart C</h3>
+<pre class="r"><code>rest_inspec_df |&gt; 
+  filter(str_detect(dba, &quot;[Pp][Ii][Zz][Zz][Aa]&quot;)) |&gt;
+  mutate(
+    boro = fct_infreq(boro),
+    boro = fct_recode(boro, &quot;The City&quot; = &quot;Manhattan&quot;)) |&gt;
+  ggplot(aes(x = boro, fill = grade)) + 
+  geom_bar() </code></pre>
+<p><img src="p8105_hw4_jl6648_problem2_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
+</div>
 </div>
 
 
