@@ -21,15 +21,15 @@ Column {data-width=650}
 ### Chart A
 
 ```{r}
-data("rest_inspec")
+data("rest_inspec")                                                                          # load data
 
-rest_inspec_df =
+rest_inspec_df =                                                             # filter interested dataset
   rest_inspec |>
   filter(grade %in% c("A", "B", "C"), boro != "Missing") |> 
   mutate(boro = str_to_title(boro)) |>
   drop_na()
 
-rest_inspec_df |>
+rest_inspec_df |>                                         # plot a figure shows the score from each boro
   plot_ly(y = ~score, color = ~boro, type = "box")
 ```
 
@@ -39,6 +39,7 @@ Column {data-width=350}
 ### Chart B
 
 ```{r}
+# plot a figure shows the score from each boro in scatter plot
 
 rest_inspec_df |>
   plot_ly(
@@ -49,11 +50,12 @@ rest_inspec_df |>
 
 
 ```{r}
+# plot a figure shows the grade from each boro
 
-rest_inspec_df |> 
-   count(boro) |>
-   mutate(boro = fct_reorder(boro, n)) |> 
-  plot_ly(x = ~boro, y = ~n, color = ~boro, type = "bar")
+rest_inspec_df |>
+  group_by(boro, grade) |>
+  summarize(n_obs = n()) |>
+  plot_ly(x = ~boro, y = ~n_obs, color = ~grade, type = "bar")
 ```
 
 
